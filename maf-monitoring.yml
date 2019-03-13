@@ -1,0 +1,216 @@
+version: "3.3"
+
+networks:
+  monitoring:
+    driver: overlay
+    attachable: true
+  gateway:
+    driver: overlay
+    attachable: true
+
+configs:
+  prometheus:
+    file: ./config/prometheus.yml
+  alertmanager:
+    file: ./config/alertmanager.yml
+  karma:
+    file: ./config/karma.yaml
+
+volumes:
+  prometheus:
+    driver: sapk/plugin-gluster
+    driver_opts:
+      voluri: "localhost:swarmVol"
+  alertmanager:
+    driver: sapk/plugin-gluster
+    driver_opts:
+      voluri: "localhost:swarmVol"
+  grafana-postgres:
+    driver: sapk/plugin-gluster
+    driver_opts:
+      voluri: "localhost:swarmVol"
+  grafana:
+    driver: sapk/plugin-gluster
+    driver_opts:
+      voluri: "localhost:swarmVol"
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.8.0
+    networks:
+      - monitoring
+    configs:
+      - source: prometheus
+        target: /etc/prometheus/prometheus.yml
+    volumes:
+      - prometheus:/prometheus
+      - ./prometheus/rules:/etc/prometheus/rules
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention=3h'
+      - '--web.enable-lifecycle'
+    healthcheck:
+      test: "/bin/wget -q -Y off http://localhost:9090/status -O /dev/null > /dev/null 2>&1"
+      interval: 10s
+      timeout: 3s
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 10s
+
+  alertmanager:
+    image: prom/alertmanager:v0.16.1
+    networks:
+      - monitoring
+      - gateway
+    ports:
+      - 9093:9093
+    volumes:
+      - alertmanager:/alert/data
+    configs:
+      - source: alertmanager
+        target: /etc/alertmanager/alertmanager.yml
+    command: [
+      '--config.file=/etc/alertmanager/alertmanager.yml', 
+      '--storage.path=/alert/data'
+    ]
+    healthcheck:
+      test: "/bin/wget -q -Y off http://localhost:9093/metrics -O /dev/null > /dev/null 2>&1"
+      interval: 10s
+      timeout: 3s
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 10s
+
+  cadvisor:
+    image: google/cadvisor:v0.33.0
+    command: -logtostderr -docker_only
+    networks:
+      - monitoring
+    volumes:
+      - /:/rootfs:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run:/var/run
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 10s
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
+    healthcheck:
+      test: "/usr/bin/wget -q -Y off http://localhost:8080/healthz -O /dev/null > /dev/null 2>&1"
+      interval: 25s
+      timeout: 3s
+
+  grafana:
+    image: grafana/grafana:6.0.1
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - grafana:/var/lib/grafana
+    environment:
+      TZ: Europe/Amsterdam
+      GF_EXTERNAL_IMAGE_STORAGE_PROVIDER: local
+      GF_INSTALL_PLUGINS: grafana-piechart-panel,grafana-simple-json-datasource,jdbranham-diagram-panel,vonage-status-panel
+      GF_DATABASE_HOST: "postgres:5432"
+      GF_DATABASE_PASSWORD: SuperGrafanaPass123
+      GF_DATABASE_SSL_MODE: disable
+      GF_DATABASE_TYPE: postgres
+      GF_DATABASE_USER: grafana
+      GF_SERVER_DOMAIN: monitoring.maf.nl
+      GF_SERVER_ROOT_URL: https://monitoring.maf.nl
+      GF_SESSION_PROVIDER: redis
+      GF_SESSION_PROVIDER_CONFIG: addr=redis:6379,pool_size=100,db=grafana
+      GF_USERS_ALLOW_ORG_CREATE: 'false'
+      GF_USERS_ALLOW_SIGN_UP: 'false'
+      GF_USERS_AUTO_ASSIGN_ORG: 'true'
+      GF_USERS_AUTO_ASSIGN_ORG_ROLE: Editor
+      GF_ALERTING_ENABLED: 'true'
+      GF_EXPLORE_ENABLED: 'true'
+    networks:
+      - monitoring
+      - gateway
+    ports:
+      - target: 3000
+        published: 3000
+        protocol: tcp
+        mode: ingress
+    healthcheck:
+      test: "/usr/bin/curl -s -I -X GET http://localhost:3000/login"
+      interval: 10s
+      timeout: 3s
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 10s
+
+  redis:
+    image: redis
+    networks:
+      - monitoring
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 10s
+
+  postgres:
+    image: postgres:11.2
+    environment:
+      POSTGRES_PASSWORD: SuperGrafanaPass123
+      POSTGRES_USER: grafana
+    volumes:
+      - grafana-postgres:/var/lib/postgresql/data
+    networks:
+      - monitoring
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 10s
+
+  karma:
+    image: lmierzwa/karma:latest
+    networks:
+      - monitoring
+      - gateway
+    ports:
+      - target: 8080
+        published: 8080
+        protocol: tcp
+        mode: ingress
+    configs:
+      - source: karma
+        target: /data/config.yaml
+    environment:
+      TZ: Europe/Amsterdam
+      CONFIG_FILE: "/data/config.yaml"
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 10s

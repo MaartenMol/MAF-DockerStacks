@@ -1,0 +1,23 @@
+global:
+  smtp_smarthost: 'smtp.internl.net:25'
+  smtp_from: 'alerts@internl.net'
+#  smtp_auth_username: '' 
+#  smtp_auth_password: ''
+  smtp_require_tls: false
+
+route:
+  receiver: 'test-team'
+  group_by: ['alertname']
+  group_wait: 15s
+  group_interval: 15s
+  repeat_interval: 1m
+
+receivers:
+  - name: 'test-team'
+    email_configs:
+    - to: 'maarten.mol@tele2.com'
+      send_resolved: true
+  # - name: "alerta"
+  #   webhook_configs:
+  #   - url: 'http://nijmegen_alerta:8080/api/webhooks/prometheus?api-key=bUaBKNwxpkw76_zlU6uuf1_ZQWJ-FfJyL00wba1X'
+  #     send_resolved: true

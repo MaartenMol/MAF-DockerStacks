@@ -1,0 +1,10 @@
+alertmanager:
+  interval: 10s
+  servers:
+    - name: PROMETHEUS
+      uri: http://alertmanager:9093
+      timeout: 30s
+      proxy: false
+log:
+  config: true
+  level: debug
