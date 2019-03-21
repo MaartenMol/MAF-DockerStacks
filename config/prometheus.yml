@@ -59,11 +59,6 @@ scrape_configs:
     consul_sd_configs:
       - server:   'CONSUL:8500'
         services: ["Node-Exporter"]
-    dns_sd_configs:
-    - names:
-      - 'tasks.node-exporter-asd2'
-      type: 'A'
-      port: 9100
     relabel_configs:
       - source_labels: ['__meta_consul_address']
         separator: ';'
