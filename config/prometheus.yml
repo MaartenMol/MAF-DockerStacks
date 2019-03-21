@@ -59,14 +59,14 @@ scrape_configs:
     consul_sd_configs:
       - server:   'CONSUL:8500'
         services: ["Node-Exporter"]
-    relabel_configs:
-      - source_labels: ['__meta_consul_address']
-        separator: ';'
-        target_label:  '__address__'
-        replacement: '${1}:9090'
-        action: 'replace'
-      - source_labels: [__address__]
-        separator: ':'
-        regex: '(.*):(.*)'
-        replacement: '$1'
-        target_label: instance
+    # relabel_configs:
+    #   - source_labels: ['__meta_consul_address']
+    #     separator: ';'
+    #     target_label:  '__address__'
+    #     replacement: '${1}:9090'
+    #     action: 'replace'
+    #   - source_labels: [__address__]
+    #     separator: ':'
+    #     regex: '(.*):(.*)'
+    #     replacement: '$1'
+    #     target_label: instance
