@@ -24,13 +24,15 @@ configs:
 
 volumes:
   elasticsearch:
-    driver: sapk/plugin-gluster
+    driver: glusterfs
     driver_opts:
-      voluri: "localhost:swarmVol"
+      servers: localhost
+    name: "elasticsearch"
   elastalert:
-    driver: sapk/plugin-gluster
+    driver: glusterfs
     driver_opts:
-      voluri: "localhost:swarmVol"
+      servers: localhost
+    name: "elastalert"
 
 services:
   elasticsearch:
