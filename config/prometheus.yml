@@ -18,8 +18,11 @@ rule_files:
 scrape_configs:
   - job_name: prometheus
     scrape_interval: 60s
-    static_configs:
-      - targets: ['prometheus:9090']
+    dns_sd_configs:
+    - names:
+      - 'tasks.prometheus'
+      type: 'A'
+      port: 9090
     relabel_configs:
       - source_labels: [__address__]
         separator: ':'
@@ -59,12 +62,12 @@ scrape_configs:
     consul_sd_configs:
       - server:   'CONSUL:8500'
         services: ["Node-Exporter"]
-    # relabel_configs:
-    #   - source_labels: ['__meta_consul_address']
-    #     separator: ';'
-    #     target_label:  '__address__'
-    #     replacement: '${1}:9090'
-    #     action: 'replace'
+    relabel_configs:
+      - source_labels: ['__meta_consul_address']
+        separator: ';'
+        target_label:  '__address__'
+        replacement: '${1}:9100'
+        action: 'replace'
     #   - source_labels: [__address__]
     #     separator: ':'
     #     regex: '(.*):(.*)'
