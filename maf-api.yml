@@ -1,0 +1,42 @@
+version: '3.2'
+
+networks:
+  api_network:
+    driver: overlay
+    attachable: true
+  gateway:
+    external:
+      name: lbgateway
+
+volumes:
+  mongo:
+    driver: sapk/plugin-gluster
+    driver_opts:
+      voluri: "localhost:swarmVol"
+
+services:
+  maf-db:
+    image: mongo
+    volumes:
+      - mongo:/data/db
+    networks:
+      - api_network
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  maf-api:
+    image: mennoaltijdfit/api
+    environment:
+      db_ip: maf-db
+    ports:
+      - target: 5000
+        published: 5000
+        protocol: tcp
+        mode: ingress
+    networks:
+      - api_network
+      - gateway
+    deploy:
+      mode: replicated
+      replicas: 1

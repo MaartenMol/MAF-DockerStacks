@@ -4,6 +4,9 @@ networks:
   agent_network:
     driver: overlay
     attachable: true
+  gateway:
+    external:
+      name: lbgateway
 
 volumes:
   portainer:
@@ -42,6 +45,7 @@ services:
       - portainer:/data
     networks:
       - agent_network
+      - gateway
     deploy:
       mode: replicated
       replicas: 1

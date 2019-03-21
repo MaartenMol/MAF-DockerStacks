@@ -5,8 +5,8 @@ networks:
     driver: overlay
     attachable: true
   gateway:
-    driver: overlay
-    attachable: true
+    external:
+      name: lbgateway
 
 configs:
   prometheus:
