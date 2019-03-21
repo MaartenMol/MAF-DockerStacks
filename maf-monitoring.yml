@@ -61,8 +61,6 @@ services:
       - '--web.enable-lifecycle'
     extra_hosts:
       - "consul:192.168.0.185"
-      - "consul:192.168.0.186"
-      - "consul:192.168.0.187"
     healthcheck:
       test: "/bin/wget -q -Y off http://localhost:9090/status -O /dev/null > /dev/null 2>&1"
       interval: 10s
