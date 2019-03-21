@@ -21,17 +21,17 @@ volumes:
     driver: glusterfs
     driver_opts:
       servers: localhost
-    name: "monitoring/prometheus"
+    name: "prometheus"
   alertmanager:
     driver: glusterfs
     driver_opts:
       servers: localhost
-    name: "monitoring/alertmanager"
+    name: "alertmanager"
   grafana-postgres:
     driver: glusterfs
     driver_opts:
       servers: localhost
-    name: "monitoring/grafana-db"
+    name: "grafana-db"
   grafana:
     driver: glusterfs
     driver_opts:
