@@ -10,7 +10,7 @@ networks:
 
 volumes:
   portainer:
-    driver: sapk/plugin-gluster
+    driver: sapk/plugin-gluster:v1.0.7-3
     driver_opts:
       voluri: "localhost:swarmVol"
 
