@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.4'
 
 networks:
   agent_network:
@@ -10,9 +10,10 @@ networks:
 
 volumes:
   portainer:
-    driver: sapk/plugin-gluster:v1.0.7-3
+    driver: glusterfs
     driver_opts:
-      voluri: "localhost:swarmVol"
+      servers: localhost
+    name: "portainer"
 
 services:
   agent:
