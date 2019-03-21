@@ -18,19 +18,19 @@ configs:
 
 volumes:
   prometheus:
-    driver: sapk/plugin-gluster
+    driver: sapk/plugin-gluster:v1.0.7-3
     driver_opts:
       voluri: "localhost:swarmVol"
   alertmanager:
-    driver: sapk/plugin-gluster
+    driver: sapk/plugin-gluster:v1.0.7-3
     driver_opts:
       voluri: "localhost:swarmVol"
   grafana-postgres:
-    driver: sapk/plugin-gluster
+    driver: sapk/plugin-gluster:v1.0.7-3
     driver_opts:
       voluri: "localhost:swarmVol"
   grafana:
-    driver: sapk/plugin-gluster
+    driver: sapk/plugin-gluster:v1.0.7-3
     driver_opts:
       voluri: "localhost:swarmVol"
 
