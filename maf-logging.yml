@@ -46,6 +46,7 @@ services:
       ES_JAVA_OPTS: "-Xmx1024m -Xms512m"
     networks:
       - logging
+      - gateway
     deploy:
       restart_policy:
         condition: on-failure
