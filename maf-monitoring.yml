@@ -36,7 +36,7 @@ volumes:
     driver: glusterfs
     driver_opts:
       servers: localhost
-    name: "monitoring/grafana"
+    name: "grafana"
 
 services:
   prometheus:
