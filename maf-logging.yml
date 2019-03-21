@@ -142,7 +142,7 @@ services:
     image: docker.elastic.co/beats/filebeat:6.5.1
     user: root
     networks:
-      - monitoring
+      - logging
     configs:
       - source: filebeat
         target: /usr/share/filebeat/filebeat.yml
