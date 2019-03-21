@@ -32,7 +32,7 @@ services:
       db_ip: maf-db
     ports:
       - target: 5000
-        published: 5000
+        published: 5050
         protocol: tcp
         mode: ingress
     networks:
