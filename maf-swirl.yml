@@ -1,0 +1,47 @@
+version: '3.4'
+
+networks:
+  net:
+    driver: overlay
+    attachable: true
+  gateway:
+    external:
+      name: lbgateway
+
+volumes:
+  swirl-db:
+    driver: glusterfs
+    driver_opts:
+      servers: localhost
+    name: "swirl-db"
+
+services:
+  swirl:
+    image: cuigh/swirl
+    environment:
+      DB_ADDRESS: swirl-db:27017/swirl
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - target: 8001
+        published: 8001
+        protocol: tcp
+        mode: ingress
+    networks:
+      - net
+      - gateway
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
+  swirl-db:
+    image: mongo
+    volumes:
+      - swirl-db:/data/db
+    networks:
+      - net
+    deploy:
+      mode: replicated
+      replicas: 1
