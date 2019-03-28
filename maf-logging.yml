@@ -24,10 +24,13 @@ configs:
 
 volumes:
   elasticsearch:
-    driver: glusterfs
+    name: "vdvs_elasticsearch@SSD-01"
+    driver: vsphere
     driver_opts:
-      servers: localhost
-    name: "elasticsearch"
+      size: 10Gb
+      diskformat: thin
+      attach-as: independent_persistent
+      fstype: ext4
   elastalert:
     driver: glusterfs
     driver_opts:

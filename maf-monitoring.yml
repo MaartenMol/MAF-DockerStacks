@@ -18,20 +18,26 @@ configs:
 
 volumes:
   prometheus:
-    driver: glusterfs
+    name: "vdvs_prometheus@SSD-01"
+    driver: vsphere
     driver_opts:
-      servers: localhost
-    name: "prometheus"
+      size: 25Gb
+      diskformat: thin
+      attach-as: independent_persistent
+      fstype: ext4
   alertmanager:
     driver: glusterfs
     driver_opts:
       servers: localhost
     name: "alertmanager"
   grafana-postgres:
-    driver: glusterfs
+    name: "vdvs_grafana-db@SSD-01"
+    driver: vsphere
     driver_opts:
-      servers: localhost
-    name: "grafana-db"
+      size: 15Gb
+      diskformat: thin
+      attach-as: independent_persistent
+      fstype: ext4
   grafana:
     driver: glusterfs
     driver_opts:
