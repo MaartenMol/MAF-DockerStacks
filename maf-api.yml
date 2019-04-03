@@ -1,42 +1,210 @@
 version: '3.4'
 
 networks:
-  api_network:
+  api:
     driver: overlay
     attachable: true
   gateway:
     external:
       name: lbgateway
+  mongo:
+    driver: overlay
+    attachable: true
+  mongos:
+    driver: overlay
+    attachable: true
 
 volumes:
-  mongo:
-    driver: glusterfs
+  mongo-data-01:
+    name: "vdvs_mongo-data-01@SSD-01"
+    driver: vsphere
     driver_opts:
-      servers: localhost
-    name: "mafApiDB"
+      size: 25Gb
+      diskformat: thin
+      attach-as: independent_persistent
+      fstype: ext4
+  mongo-data-02:
+    name: "vdvs_mongo-data-02@SSD-01"
+    driver: vsphere
+    driver_opts:
+      size: 25Gb
+      diskformat: thin
+      attach-as: independent_persistent
+      fstype: ext4
+  mongo-data-03:
+    name: "vdvs_mongo-data-03@SSD-01"
+    driver: vsphere
+    driver_opts:
+      size: 25Gb
+      diskformat: thin
+      attach-as: independent_persistent
+      fstype: ext4
+  mongo-cfg-01:
+    name: "vdvs_mongo-cfg-01@SSD-01"
+    driver: vsphere
+    driver_opts:
+      size: 25Gb
+      diskformat: thin
+      attach-as: independent_persistent
+      fstype: ext4
+  mongo-cfg-02:
+    name: "vdvs_mongo-cfg-02@SSD-01"
+    driver: vsphere
+    driver_opts:
+      size: 25Gb
+      diskformat: thin
+      attach-as: independent_persistent
+      fstype: ext4
+  mongo-cfg-03:
+    name: "vdvs_mongo-cfg-03@SSD-01"
+    driver: vsphere
+    driver_opts:
+      size: 25Gb
+      diskformat: thin
+      attach-as: independent_persistent
+      fstype: ext4
+
+configs:
+  client_secrets:
+    file: ./config/client_secrets.json
 
 services:
-  maf-db:
-    image: mongo
-    volumes:
-      - mongo:/data/db
+
+  data1:
+    image: mongo:3.4
     networks:
-      - api_network
+      - mongo
+    volumes:
+      - mongo-data-01:/data/db
+    command: mongod --shardsvr --replSet datars --smallfiles --port 27017
     deploy:
       mode: replicated
       replicas: 1
 
-  maf-api:
+  data2:
+    image: mongo:3.4
+    networks:
+      - mongo
+    volumes:
+      - mongo-data-02:/data/db
+    command: mongod --shardsvr --replSet datars --smallfiles --port 27017
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  data3:
+    image: mongo:3.4
+    networks:
+      - mongo
+    volumes:
+      - mongo-data-03:/data/db
+    command: mongod --shardsvr --replSet datars --smallfiles --port 27017
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  cfg1:
+    image: mongo:3.4
+    networks:
+      - mongo
+    volumes:
+      - mongo-cfg-01:/data/configdb
+    command: mongod --configsvr --replSet cfgrs --smallfiles --port 27017
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  cfg2:
+    image: mongo:3.4
+    networks:
+      - mongo
+    volumes:
+      - mongo-cfg-02:/data/configdb
+    command: mongod --configsvr --replSet cfgrs --smallfiles --port 27017
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  cfg3:
+    image: mongo:3.4
+    networks:
+      - mongo
+    volumes:
+      - mongo-cfg-03:/data/configdb
+    command: mongod --configsvr --replSet cfgrs --smallfiles --port 27017
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  mongos1:
+    image: mongo:3.4
+    networks:
+      - mongo
+      - mongos
+    command: mongos --configdb cfgrs/cfg1:27017,cfg2:27017,cfg3:27017
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  mongos2:
+    image: mongo:3.4
+    networks:
+      - mongo
+      - mongos
+    command: mongos --configdb cfgrs/cfg1:27017,cfg2:27017,cfg3:27017
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  bootstrap:
+    image: stefanprodan/mongo-bootstrap:latest
+    networks:
+      - mongo
+    command:
+      - '-dataSet=datars/data1:27017,data2:27017,data3:27017'
+      - '-configSet=cfgrs/cfg1:27017,cfg2:27017,cfg3:27017'
+      - '-mongos=mongos1:27017,mongos2:27017'
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+  api:
     image: mennoaltijdfit/api
     environment:
-      db_ip: maf-db
+      conUri: "'mongodb://mongos1,mongos2', replicaSet='rs0'"
+      db_name: "MAF"
     ports:
       - target: 5000
         published: 5050
         protocol: tcp
         mode: ingress
     networks:
-      - api_network
+      - mongos
+      - api
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  app:
+    image: mennoaltijdfit/app
+    environment:
+      api_url: "http://api:5000"
+      app_secret_key: "h2([g2wf;%4Hn[u2C__mG@Qa+@KneNQEb-XB2>+atpJz6+Nm7qzX.+SpPp6r)fRq"
+      okta_client_url: "https://dev-907244.okta.com"
+      okta_client_key: "00f6f5Q-HQMOvwxtvqbCHEHl08PkoYeAIyoTKiapCS"
+    configs:
+      - source: client_secrets
+        target: /client_secrets.json
+    ports:
+      - target: 8080
+        published: 80
+        protocol: tcp
+        mode: ingress
+    networks:
+      - api
       - gateway
     deploy:
       mode: replicated
