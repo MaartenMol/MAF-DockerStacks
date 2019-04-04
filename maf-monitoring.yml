@@ -15,6 +15,8 @@ configs:
     file: ./config/alertmanager.yml
   karma:
     file: ./config/karma.yaml
+  ldap:
+    file: ./config/ldap.toml
 
 volumes:
   prometheus:
@@ -134,10 +136,13 @@ services:
       timeout: 3s
 
   grafana:
-    image: grafana/grafana:6.0.1
+    image: grafana/grafana:6.1.0
     depends_on:
       - postgres
       - redis
+    configs:
+      - source: ldap
+        target: /etc/grafana/ldap.toml
     volumes:
       - grafana:/var/lib/grafana
     environment:
@@ -149,8 +154,8 @@ services:
       GF_DATABASE_SSL_MODE: disable
       GF_DATABASE_TYPE: postgres
       GF_DATABASE_USER: grafana
-      GF_SERVER_DOMAIN: monitoring.maf.nl
-      GF_SERVER_ROOT_URL: https://monitoring.maf.nl
+      GF_SERVER_DOMAIN: monitoring.maf.mol.local
+      GF_SERVER_ROOT_URL: https://monitoring.maf.mol.local
       GF_SESSION_PROVIDER: redis
       GF_SESSION_PROVIDER_CONFIG: addr=redis:6379,pool_size=100,db=grafana
       GF_USERS_ALLOW_ORG_CREATE: 'false'
@@ -159,6 +164,7 @@ services:
       GF_USERS_AUTO_ASSIGN_ORG_ROLE: Editor
       GF_ALERTING_ENABLED: 'true'
       GF_EXPLORE_ENABLED: 'true'
+      GF_AUTH_LDAP_ENABLED: 'true'
     networks:
       - monitoring
       - gateway
