@@ -1,0 +1,64 @@
+version: "3.4"
+
+networks:
+  traefik:
+    driver: overlay
+  gateway:
+    external:
+      name: lbgateway
+
+services:
+  traefik_init:
+    image: traefik:1.7
+    command:
+      - "storeconfig"
+      - "--api"
+      - "--entrypoints=Name:http Address::80"
+      - "--defaultentrypoints=http"
+      - "--docker"
+      - "--docker.swarmMode"
+      - "--docker.domain=maf.cloud"
+      - "--docker.watch"
+      - "--consul"
+      - "--consul.endpoint=master-01.maf.cloud:8500"
+      - "--consul.prefix=traefik"
+    networks:
+      - traefik
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - consul
+
+  traefik:
+    image: traefik:1.7
+    depends_on:
+      - traefik_init
+      - consul
+    command:
+      - "--consul"
+      - "--consul.endpoint=master-01.maf.cloud:8500"
+      - "--consul.prefix=traefik"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - webgateway
+      - traefik
+    ports:
+      - target: 80
+        published: 80
+        mode: host
+      - target: 8080
+        published: 8080
+        mode: host
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
