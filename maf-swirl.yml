@@ -18,6 +18,8 @@ volumes:
 services:
   swirl:
     image: cuigh/swirl
+    depends_on:
+      - swirl-db
     environment:
       DB_ADDRESS: swirl-db:27017/swirl
     volumes:

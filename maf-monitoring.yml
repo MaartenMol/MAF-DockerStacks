@@ -60,7 +60,7 @@ services:
       - source: prometheus
         target: /etc/prometheus/prometheus.yml
     volumes:
-      - prometheus:/prometheus
+      - prometheus/prom:/prometheus
       - ./prometheus/rules:/etc/prometheus/rules
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -82,6 +82,8 @@ services:
 
   alertmanager:
     image: prom/alertmanager:v0.16.1
+    depends_on:
+      - prometheus
     networks:
       - monitoring
       - gateway
@@ -204,7 +206,7 @@ services:
       POSTGRES_PASSWORD: SuperGrafanaPass123
       POSTGRES_USER: grafana
     volumes:
-      - grafana-postgres:/var/lib/postgresql/data
+      - grafana-postgres/postgres:/var/lib/postgresql/data
     networks:
       - monitoring
     deploy:
