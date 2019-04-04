@@ -30,13 +30,13 @@ scrape_configs:
         replacement: '$1'
         target_label: instance
 
-  - job_name: mongodb
+  - job_name: traefik
     scrape_interval: 60s
     dns_sd_configs:
     - names:
-      - 'tasks.mongodb-exporter'
+      - 'tasks.traefik'
       type: 'A'
-      port: 9216
+      port: 8080
     relabel_configs:
       - source_labels: [__address__]
         separator: ':'
