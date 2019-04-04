@@ -134,7 +134,7 @@ services:
   mongodb-exporter:
     image: ssalaues/mongodb-exporter
     environment:
-      MONGODB_URI: 'mongodb://mongos1:27017,mongos2:27017,data1:27017,data2:27017,data3:27017,cfg1:27017,cfg2:27017,cfg3:27017/'
+      MONGODB_URI: 'mongodb://mongos1:27017,mongos2:27017'
     networks:
       - monitoring
     deploy:
