@@ -16,53 +16,35 @@ networks:
 
 volumes:
   mongo-data-01:
-    name: "vdvs_mongo-data-01@SSD-01"
-    driver: vsphere
+    driver: glusterfs
     driver_opts:
-      size: 25Gb
-      diskformat: thin
-      attach-as: independent_persistent
-      fstype: ext4
+      servers: localhost
+    name: "mongo-data-01"
   mongo-data-02:
-    name: "vdvs_mongo-data-02@SSD-01"
-    driver: vsphere
+    driver: glusterfs
     driver_opts:
-      size: 25Gb
-      diskformat: thin
-      attach-as: independent_persistent
-      fstype: ext4
+      servers: localhost
+    name: "mongo-data-02"
   mongo-data-03:
-    name: "vdvs_mongo-data-03@SSD-01"
-    driver: vsphere
+    driver: glusterfs
     driver_opts:
-      size: 25Gb
-      diskformat: thin
-      attach-as: independent_persistent
-      fstype: ext4
+      servers: localhost
+    name: "mongo-data-03"
   mongo-cfg-01:
-    name: "vdvs_mongo-cfg-01@SSD-01"
-    driver: vsphere
+    driver: glusterfs
     driver_opts:
-      size: 25Gb
-      diskformat: thin
-      attach-as: independent_persistent
-      fstype: ext4
+      servers: localhost
+    name: "mongo-cfg-01"
   mongo-cfg-02:
-    name: "vdvs_mongo-cfg-02@SSD-01"
-    driver: vsphere
+    driver: glusterfs
     driver_opts:
-      size: 25Gb
-      diskformat: thin
-      attach-as: independent_persistent
-      fstype: ext4
+      servers: localhost
+    name: "mongo-cfg-02"
   mongo-cfg-03:
-    name: "vdvs_mongo-cfg-03@SSD-01"
-    driver: vsphere
+    driver: glusterfs
     driver_opts:
-      size: 25Gb
-      diskformat: thin
-      attach-as: independent_persistent
-      fstype: ext4
+      servers: localhost
+    name: "mongo-cfg-03"
 
 configs:
   client_secrets:

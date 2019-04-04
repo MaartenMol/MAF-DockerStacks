@@ -20,26 +20,20 @@ configs:
 
 volumes:
   prometheus:
-    name: "vdvs_prometheus@SSD-01"
-    driver: vsphere
+    driver: glusterfs
     driver_opts:
-      size: 25Gb
-      diskformat: thin
-      attach-as: independent_persistent
-      fstype: ext4
+      servers: localhost
+    name: "prometheus"
   alertmanager:
     driver: glusterfs
     driver_opts:
       servers: localhost
     name: "alertmanager"
   grafana-postgres:
-    name: "vdvs_grafana-db@SSD-01"
-    driver: vsphere
+    driver: glusterfs
     driver_opts:
-      size: 15Gb
-      diskformat: thin
-      attach-as: independent_persistent
-      fstype: ext4
+      servers: localhost
+    name: "grafana-postgres"
   grafana:
     driver: glusterfs
     driver_opts:
@@ -60,7 +54,7 @@ services:
       - source: prometheus
         target: /etc/prometheus/prometheus.yml
     volumes:
-      - prometheus/prom:/prometheus
+      - prometheus:/prometheus
       - ./prometheus/rules:/etc/prometheus/rules
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -68,7 +62,7 @@ services:
       - '--storage.tsdb.retention=3h'
       - '--web.enable-lifecycle'
     extra_hosts:
-      - "consul:192.168.0.185"
+      - "consul:192.168.0.221"
     healthcheck:
       test: "/bin/wget -q -Y off http://localhost:9090/status -O /dev/null > /dev/null 2>&1"
       interval: 10s
@@ -206,7 +200,7 @@ services:
       POSTGRES_PASSWORD: SuperGrafanaPass123
       POSTGRES_USER: grafana
     volumes:
-      - grafana-postgres/postgres:/var/lib/postgresql/data
+      - grafana-postgres:/var/lib/postgresql/data
     networks:
       - monitoring
     deploy:
