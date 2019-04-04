@@ -162,7 +162,7 @@ services:
       - mongos1
       - mongos2
     environment:
-      conUri: "'mongodb://mongos1,mongos2', replicaSet='rs0'"
+      #conUri: "'mongodb://mongos1,mongos2', replicaSet='rs0'"
       db_name: "MAF"
     ports:
       - target: 5000
