@@ -28,11 +28,6 @@ volumes:
     driver_opts:
       servers: localhost
     name: "elasticsearch"
-  elastalert:
-    driver: glusterfs
-    driver_opts:
-      servers: localhost
-    name: "elastalert"
 
 services:
   elasticsearch:
@@ -108,26 +103,6 @@ services:
     networks:
       - logging
       - gateway
-    depends_on:
-      - elasticsearch
-    deploy:
-      mode: replicated
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 10s
-
-  elastalert:
-    image: bitsensor/elastalert:latest
-    configs:
-      - source: elastalert
-        target: /opt/elastalert/config.yaml
-    volumes:
-      - elastalert:/opt/elastalert/rules
-    networks:
-      - logging
     depends_on:
       - elasticsearch
     deploy:
