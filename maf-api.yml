@@ -160,6 +160,12 @@ services:
     image: stefanprodan/mongo-bootstrap:latest
     networks:
       - mongo
+      - gateway
+    ports:
+      - target: 9090
+        published: 9999
+        protocol: tcp
+        mode: ingress
     command:
       - '-dataSet=datars/data1:27017,data2:27017,data3:27017'
       - '-configSet=cfgrs/cfg1:27017,cfg2:27017,cfg3:27017'
@@ -167,12 +173,12 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      placement:
-        constraints:
-          - node.role == manager
 
   api:
     image: mennoaltijdfit/api
+    link:
+      - mongos1
+      - mongos2
     environment:
       conUri: "'mongodb://mongos1,mongos2', replicaSet='rs0'"
       db_name: "MAF"
@@ -190,6 +196,8 @@ services:
 
   app:
     image: mennoaltijdfit/app
+    link:
+      - api
     environment:
       api_url: "http://api:5000"
       app_secret_key: "h2([g2wf;%4Hn[u2C__mG@Qa+@KneNQEb-XB2>+atpJz6+Nm7qzX.+SpPp6r)fRq"

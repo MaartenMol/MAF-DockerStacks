@@ -145,6 +145,7 @@ services:
         target: /etc/grafana/ldap.toml
     volumes:
       - grafana:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
     environment:
       TZ: Europe/Amsterdam
       GF_EXTERNAL_IMAGE_STORAGE_PROVIDER: local
