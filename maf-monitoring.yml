@@ -145,7 +145,7 @@ services:
     environment:
       TZ: Europe/Amsterdam
       GF_EXTERNAL_IMAGE_STORAGE_PROVIDER: local
-      GF_INSTALL_PLUGINS: grafana-piechart-panel,grafana-simple-json-datasource,jdbranham-diagram-panel,vonage-status-panel
+      GF_INSTALL_PLUGINS: grafana-piechart-panel,grafana-simple-json-datasource,jdbranham-diagram-panel,vonage-status-panel,gnocchixyz-gnocchi-datasource
       GF_DATABASE_HOST: "postgres:5432"
       GF_DATABASE_PASSWORD: SuperGrafanaPass123
       GF_DATABASE_SSL_MODE: disable
