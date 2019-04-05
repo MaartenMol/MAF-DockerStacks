@@ -30,13 +30,13 @@ scrape_configs:
         replacement: '$1'
         target_label: instance
 
-  - job_name: traefik
+  - job_name: haproxy
     scrape_interval: 60s
     dns_sd_configs:
     - names:
-      - 'tasks.traefik'
+      - 'tasks.haproxy'
       type: 'A'
-      port: 8080
+      port: 9101
     relabel_configs:
       - source_labels: [__address__]
         separator: ':'

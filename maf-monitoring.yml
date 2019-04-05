@@ -131,6 +131,18 @@ services:
       interval: 25s
       timeout: 3s
 
+  haproxy:
+    image: prom/haproxy-exporter
+    command: --haproxy.scrape-uri="http://lb-vip:1936/haproxy?stats;csv"
+    networks:
+      - monitoring
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 10s
+
   grafana:
     image: grafana/grafana:6.1.0
     depends_on:
