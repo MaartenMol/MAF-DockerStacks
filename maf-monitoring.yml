@@ -75,7 +75,7 @@ services:
         window: 10s
 
   alertmanager:
-    image: prom/alertmanager:v0.16.1
+    image: prom/alertmanager:v0.15.3
     depends_on:
       - prometheus
     networks:
