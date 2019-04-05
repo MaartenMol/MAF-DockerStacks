@@ -1,10 +1,3 @@
-global:
-  smtp_smarthost: 'smtp.internl.net:25'
-  smtp_from: 'alerts@internl.net'
-#  smtp_auth_username: '' 
-#  smtp_auth_password: ''
-  smtp_require_tls: false
-
 route:
   receiver: 'test-team'
   group_by: ['alertname']
@@ -14,10 +7,9 @@ route:
 
 receivers:
   - name: 'test-team'
-    email_configs:
-    - to: 'maarten.mol@tele2.com'
-      send_resolved: true
-  # - name: "alerta"
-  #   webhook_configs:
-  #   - url: 'http://nijmegen_alerta:8080/api/webhooks/prometheus?api-key=bUaBKNwxpkw76_zlU6uuf1_ZQWJ-FfJyL00wba1X'
-  #     send_resolved: true
+    slack_configs:
+      - send_resolved: true
+        text: "{{ .CommonAnnotations.description }}"
+        username: 'Prometheus'
+        channel: 'server_monitoring'
+        api_url: 'https://hooks.slack.com/services/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'
