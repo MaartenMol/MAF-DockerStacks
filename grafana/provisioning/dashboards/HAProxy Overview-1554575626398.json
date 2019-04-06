@@ -1,766 +1,843 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_LOCALHOST",
-      "label": "localhost",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "4.2.0"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    }
-  ],
   "annotations": {
-    "list": []
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
   },
   "description": "HAProxy backend servers",
   "editable": true,
   "gnetId": 2428,
   "graphTooltip": 1,
-  "hideControls": false,
-  "id": null,
+  "id": 10,
+  "iteration": 1554575424662,
   "links": [],
-  "refresh": "5m",
-  "rows": [
+  "panels": [
     {
-      "collapse": false,
-      "height": 127,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_LOCALHOST}",
-          "decimals": 0,
-          "fill": 7,
-          "id": 85,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": true,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 3,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "Backends Down",
-              "color": "#890F02"
-            },
-            {
-              "alias": "Backends Down",
-              "transform": "negative-Y"
-            }
-          ],
-          "span": 12,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "count(haproxy_backend_up{backend=~\"$backend\", instance=~\"$host:$port\"} == 1)",
-              "hide": false,
-              "interval": "$interval",
-              "intervalFactor": 2,
-              "legendFormat": "Backends Up",
-              "refId": "A",
-              "step": 60
-            },
-            {
-              "expr": "count(haproxy_backend_up{backend=~\"$backend\",instance=~\"$host:$port\"} == 0)",
-              "interval": "$interval",
-              "intervalFactor": 2,
-              "legendFormat": "Backends Down",
-              "refId": "B",
-              "step": 60
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Backends Up / Down",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "transparent": false,
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        }
-      ],
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 86,
+      "panels": [],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "Basic Backend status",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": false,
-      "height": 377,
-      "panels": [
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "decimals": 0,
+      "fill": 7,
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 85,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 3,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
         {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_LOCALHOST}",
-          "description": "",
-          "editable": true,
-          "error": false,
-          "fill": 2,
-          "grid": {},
-          "id": 83,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": true,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "/.*Back.*/",
-              "transform": "negative-Y"
-            },
-            {
-              "alias": "/.*1.*/",
-              "color": "#6ED0E0"
-            },
-            {
-              "alias": "/.*2.*/",
-              "color": "#7EB26D"
-            },
-            {
-              "alias": "/.*3.*/",
-              "color": "#1F78C1"
-            },
-            {
-              "alias": "/.*4.*/",
-              "color": "#CCA300"
-            },
-            {
-              "alias": "/.*5.*/",
-              "color": "#890F02"
-            },
-            {
-              "alias": "/.*other.*/",
-              "color": "#806EB7"
-            }
-          ],
-          "span": 12,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(irate(haproxy_frontend_http_responses_total{frontend=~\"$frontend\",code=~\"$code\",instance=~\"$host:$port\"}[5m])) by (code)",
-              "interval": "$interval",
-              "intervalFactor": 1,
-              "legendFormat": "Frontend {{ code }}",
-              "metric": "",
-              "refId": "A",
-              "step": 30
-            },
-            {
-              "expr": "sum(irate(haproxy_backend_http_responses_total{backend=~\"$backend\",code=~\"$code\",instance=~\"$host:$port\"}[5m])) by (code)",
-              "interval": "$interval",
-              "intervalFactor": 1,
-              "legendFormat": "Backend {{ code }}",
-              "metric": "",
-              "refId": "B",
-              "step": 30
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total responses by HTTP code",
-          "tooltip": {
-            "msResolution": true,
-            "shared": true,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "transparent": false,
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": 0,
-              "show": false
-            }
-          ]
+          "alias": "Backends Down",
+          "color": "#890F02"
         },
         {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_LOCALHOST}",
-          "decimals": 1,
-          "description": "",
-          "editable": true,
-          "error": false,
-          "fill": 2,
-          "grid": {},
-          "id": 75,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": true,
-            "rightSide": false,
-            "show": true,
-            "sideWidth": null,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "/.*OUT.*/",
-              "transform": "negative-Y"
-            }
-          ],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(irate(haproxy_frontend_bytes_in_total{frontend=~\"$frontend\",instance=~\"$host:$port\"}[5m])*8) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 1,
-              "legendFormat": "IN Front",
-              "metric": "",
-              "refId": "A",
-              "step": 30
-            },
-            {
-              "expr": "sum(irate(haproxy_frontend_bytes_out_total{frontend=~\"$frontend\",instance=~\"$host:$port\"}[5m])*8) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 2,
-              "legendFormat": "OUT Front",
-              "refId": "B",
-              "step": 60
-            },
-            {
-              "expr": "sum(irate(haproxy_backend_bytes_in_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])*8) by (instance)",
-              "intervalFactor": 2,
-              "legendFormat": "IN Back",
-              "refId": "C",
-              "step": 240
-            },
-            {
-              "expr": "sum(irate(haproxy_backend_bytes_out_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])*8) by (instance)",
-              "intervalFactor": 2,
-              "legendFormat": "OUT Back",
-              "refId": "D",
-              "step": 240
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Current total of incoming / outgoing bytes",
-          "tooltip": {
-            "msResolution": true,
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "bytes",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": 0,
-              "show": false
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_LOCALHOST}",
-          "description": "",
-          "editable": true,
-          "error": false,
-          "fill": 2,
-          "grid": {},
-          "id": 79,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": true,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "/.*Back.*/",
-              "transform": "negative-Y"
-            }
-          ],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(irate(haproxy_frontend_connections_total{frontend=~\"$frontend\",instance=~\"$host:$port\"}[5m])) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 1,
-              "legendFormat": "Front",
-              "metric": "",
-              "refId": "A",
-              "step": 30
-            },
-            {
-              "expr": "sum(irate(haproxy_backend_connections_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 1,
-              "legendFormat": "Back",
-              "metric": "",
-              "refId": "B",
-              "step": 30
-            },
-            {
-              "expr": "sum(irate(haproxy_backend_connection_errors_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 1,
-              "legendFormat": "Back errors",
-              "metric": "",
-              "refId": "C",
-              "step": 30
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total number of connections",
-          "tooltip": {
-            "msResolution": true,
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": 0,
-              "show": false
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_LOCALHOST}",
-          "description": "",
-          "editable": true,
-          "error": false,
-          "fill": 2,
-          "grid": {},
-          "id": 81,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": true,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "/.*Response.*/",
-              "transform": "negative-Y"
-            },
-            {
-              "alias": "/.*Backend.*/",
-              "transform": "negative-Y"
-            }
-          ],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(irate(haproxy_frontend_http_requests_total{frontend=~\"$frontend\",instance=~\"$host:$port\"}[5m])) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 1,
-              "legendFormat": "Requests",
-              "metric": "",
-              "refId": "A",
-              "step": 30
-            },
-            {
-              "expr": "sum(irate(haproxy_backend_response_errors_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 2,
-              "legendFormat": "Response errors",
-              "refId": "B",
-              "step": 60
-            },
-            {
-              "expr": "sum(irate(haproxy_frontend_request_errors_total{frontend=~\"$frontend\",instance=~\"$host:$port\"}[5m])) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 1,
-              "legendFormat": "Requests errors",
-              "metric": "",
-              "refId": "C",
-              "step": 30
-            },
-            {
-              "expr": "sum(irate(haproxy_backend_redispatch_warnings_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 2,
-              "legendFormat": "Backend redispatch",
-              "refId": "D",
-              "step": 60
-            },
-            {
-              "expr": "sum(irate(haproxy_backend_retry_warnings_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 2,
-              "legendFormat": "Backend retry",
-              "refId": "E",
-              "step": 60
-            },
-            {
-              "expr": "sum(irate(haproxy_frontend_requests_denied_total{frontend=~\"$frontend\",instance=~\"$host:$port\"}[5m])) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 2,
-              "legendFormat": "Request denied",
-              "refId": "F",
-              "step": 60
-            },
-            {
-              "expr": "sum(haproxy_backend_current_queue{backend=~\"$backend\",instance=~\"$host:$port\"}) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 2,
-              "legendFormat": "Backend Queued",
-              "refId": "G",
-              "step": 60
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total requests / responses",
-          "tooltip": {
-            "msResolution": true,
-            "shared": true,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "transparent": false,
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": 0,
-              "show": false
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_LOCALHOST}",
-          "description": "",
-          "editable": true,
-          "error": false,
-          "fill": 2,
-          "grid": {},
-          "id": 84,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": true,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "/.*Back.*/",
-              "transform": "negative-Y"
-            }
-          ],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(haproxy_frontend_current_sessions{frontend=~\"$frontend\",instance=~\"$host:$port\"}) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 1,
-              "legendFormat": "Frontend current sessions",
-              "metric": "",
-              "refId": "B",
-              "step": 30
-            },
-            {
-              "expr": "sum(haproxy_frontend_current_session_rate{frontend=~\"$frontend\",instance=~\"$host:$port\"}) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 1,
-              "legendFormat": "Frontend current session rate",
-              "metric": "",
-              "refId": "C",
-              "step": 30
-            },
-            {
-              "expr": "sum(haproxy_backend_current_sessions{backend=~\"$backend\",instance=~\"$host:$port\"}) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 1,
-              "legendFormat": "Backend current sessions",
-              "metric": "",
-              "refId": "A",
-              "step": 30
-            },
-            {
-              "expr": "sum(haproxy_backend_current_session_rate{backend=~\"$backend\",instance=~\"$host:$port\"}) by (instance)",
-              "interval": "$interval",
-              "intervalFactor": 1,
-              "legendFormat": "Backend current session rate",
-              "metric": "",
-              "refId": "D",
-              "step": 30
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Sessions",
-          "tooltip": {
-            "msResolution": true,
-            "shared": true,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "transparent": false,
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": 0,
-              "show": false
-            }
-          ]
+          "alias": "Backends Down",
+          "transform": "negative-Y"
         }
       ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Basic General Info",
-      "titleSize": "h6"
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "count(haproxy_backend_up{backend=~\"$backend\", instance=~\"$host:$port\"} == 1)",
+          "hide": false,
+          "interval": "$interval",
+          "intervalFactor": 2,
+          "legendFormat": "Backends Up",
+          "refId": "A",
+          "step": 60
+        },
+        {
+          "expr": "count(haproxy_backend_up{backend=~\"$backend\",instance=~\"$host:$port\"} == 0)",
+          "interval": "$interval",
+          "intervalFactor": 2,
+          "legendFormat": "Backends Down",
+          "refId": "B",
+          "step": 60
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Backends Up / Down",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
-      "collapse": true,
-      "height": 395,
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 87,
+      "panels": [],
+      "repeat": null,
+      "title": "Basic General Info",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "",
+      "editable": true,
+      "error": false,
+      "fill": 2,
+      "grid": {},
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 83,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "maxPerRow": 2,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Back.*/",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "/.*1.*/",
+          "color": "#6ED0E0"
+        },
+        {
+          "alias": "/.*2.*/",
+          "color": "#7EB26D"
+        },
+        {
+          "alias": "/.*3.*/",
+          "color": "#1F78C1"
+        },
+        {
+          "alias": "/.*4.*/",
+          "color": "#CCA300"
+        },
+        {
+          "alias": "/.*5.*/",
+          "color": "#890F02"
+        },
+        {
+          "alias": "/.*other.*/",
+          "color": "#806EB7"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(irate(haproxy_frontend_http_responses_total{frontend=~\"$frontend\",code=~\"$code\",instance=~\"$host:$port\"}[5m])) by (code)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "Frontend {{ code }}",
+          "metric": "",
+          "refId": "A",
+          "step": 30
+        },
+        {
+          "expr": "sum(irate(haproxy_backend_http_responses_total{backend=~\"$backend\",code=~\"$code\",instance=~\"$host:$port\"}[5m])) by (code)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "Backend {{ code }}",
+          "metric": "",
+          "refId": "B",
+          "step": 30
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Total responses by HTTP code",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "decimals": 1,
+      "description": "",
+      "editable": true,
+      "error": false,
+      "fill": 2,
+      "grid": {},
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "id": 75,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": null,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "maxPerRow": 2,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*OUT.*/",
+          "transform": "negative-Y"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(irate(haproxy_frontend_bytes_in_total{frontend=~\"$frontend\",instance=~\"$host:$port\"}[5m])*8) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "IN Front",
+          "metric": "",
+          "refId": "A",
+          "step": 30
+        },
+        {
+          "expr": "sum(irate(haproxy_frontend_bytes_out_total{frontend=~\"$frontend\",instance=~\"$host:$port\"}[5m])*8) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 2,
+          "legendFormat": "OUT Front",
+          "refId": "B",
+          "step": 60
+        },
+        {
+          "expr": "sum(irate(haproxy_backend_bytes_in_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])*8) by (instance)",
+          "intervalFactor": 2,
+          "legendFormat": "IN Back",
+          "refId": "C",
+          "step": 240
+        },
+        {
+          "expr": "sum(irate(haproxy_backend_bytes_out_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])*8) by (instance)",
+          "intervalFactor": 2,
+          "legendFormat": "OUT Back",
+          "refId": "D",
+          "step": 240
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Current total of incoming / outgoing bytes",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "",
+      "editable": true,
+      "error": false,
+      "fill": 2,
+      "grid": {},
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 16
+      },
+      "id": 79,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "maxPerRow": 2,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Back.*/",
+          "transform": "negative-Y"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(irate(haproxy_frontend_connections_total{frontend=~\"$frontend\",instance=~\"$host:$port\"}[5m])) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "Front",
+          "metric": "",
+          "refId": "A",
+          "step": 30
+        },
+        {
+          "expr": "sum(irate(haproxy_backend_connections_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "Back",
+          "metric": "",
+          "refId": "B",
+          "step": 30
+        },
+        {
+          "expr": "sum(irate(haproxy_backend_connection_errors_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "Back errors",
+          "metric": "",
+          "refId": "C",
+          "step": 30
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Total number of connections",
+      "tooltip": {
+        "msResolution": true,
+        "shared": false,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "",
+      "editable": true,
+      "error": false,
+      "fill": 2,
+      "grid": {},
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 26
+      },
+      "id": 81,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "maxPerRow": 2,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Response.*/",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "/.*Backend.*/",
+          "transform": "negative-Y"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(irate(haproxy_frontend_http_requests_total{frontend=~\"$frontend\",instance=~\"$host:$port\"}[5m])) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "Requests",
+          "metric": "",
+          "refId": "A",
+          "step": 30
+        },
+        {
+          "expr": "sum(irate(haproxy_backend_response_errors_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 2,
+          "legendFormat": "Response errors",
+          "refId": "B",
+          "step": 60
+        },
+        {
+          "expr": "sum(irate(haproxy_frontend_request_errors_total{frontend=~\"$frontend\",instance=~\"$host:$port\"}[5m])) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "Requests errors",
+          "metric": "",
+          "refId": "C",
+          "step": 30
+        },
+        {
+          "expr": "sum(irate(haproxy_backend_redispatch_warnings_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 2,
+          "legendFormat": "Backend redispatch",
+          "refId": "D",
+          "step": 60
+        },
+        {
+          "expr": "sum(irate(haproxy_backend_retry_warnings_total{backend=~\"$backend\",instance=~\"$host:$port\"}[5m])) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 2,
+          "legendFormat": "Backend retry",
+          "refId": "E",
+          "step": 60
+        },
+        {
+          "expr": "sum(irate(haproxy_frontend_requests_denied_total{frontend=~\"$frontend\",instance=~\"$host:$port\"}[5m])) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 2,
+          "legendFormat": "Request denied",
+          "refId": "F",
+          "step": 60
+        },
+        {
+          "expr": "sum(haproxy_backend_current_queue{backend=~\"$backend\",instance=~\"$host:$port\"}) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 2,
+          "legendFormat": "Backend Queued",
+          "refId": "G",
+          "step": 60
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Total requests / responses",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "",
+      "editable": true,
+      "error": false,
+      "fill": 2,
+      "grid": {},
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 26
+      },
+      "id": 84,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "maxPerRow": 2,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Back.*/",
+          "transform": "negative-Y"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(haproxy_frontend_current_sessions{frontend=~\"$frontend\",instance=~\"$host:$port\"}) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "Frontend current sessions",
+          "metric": "",
+          "refId": "B",
+          "step": 30
+        },
+        {
+          "expr": "sum(haproxy_frontend_current_session_rate{frontend=~\"$frontend\",instance=~\"$host:$port\"}) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "Frontend current session rate",
+          "metric": "",
+          "refId": "C",
+          "step": 30
+        },
+        {
+          "expr": "sum(haproxy_backend_current_sessions{backend=~\"$backend\",instance=~\"$host:$port\"}) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "Backend current sessions",
+          "metric": "",
+          "refId": "A",
+          "step": 30
+        },
+        {
+          "expr": "sum(haproxy_backend_current_session_rate{backend=~\"$backend\",instance=~\"$host:$port\"}) by (instance)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "Backend current session rate",
+          "metric": "",
+          "refId": "D",
+          "step": 30
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Sessions",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "id": 88,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "decimals": 1,
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 37
+          },
           "id": 1,
           "legend": {
             "alignAsTable": true,
@@ -776,7 +853,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
@@ -788,7 +865,7 @@
               "transform": "negative-Y"
             }
           ],
-          "span": 6,
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -812,6 +889,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Back - Current total of incoming / outgoing bytes",
           "tooltip": {
@@ -822,6 +900,7 @@
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -844,18 +923,30 @@
               "min": 0,
               "show": false
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "decimals": 1,
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 37
+          },
           "id": 42,
           "legend": {
             "alignAsTable": true,
@@ -872,7 +963,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
@@ -884,7 +975,7 @@
               "transform": "negative-Y"
             }
           ],
-          "span": 6,
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -908,6 +999,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Front - Current total of incoming / outgoing bytes",
           "tooltip": {
@@ -918,6 +1010,7 @@
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -940,29 +1033,44 @@
               "min": 0,
               "show": false
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "Throughput",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": 405,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 89,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 11,
+            "w": 12,
+            "x": 0,
+            "y": 38
+          },
           "id": 27,
           "legend": {
             "alignAsTable": true,
@@ -978,7 +1086,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
@@ -990,7 +1098,7 @@
               "transform": "negative-Y"
             }
           ],
-          "span": 6,
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1013,6 +1121,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Back - Total number of connections OK / Error",
           "tooltip": {
@@ -1023,6 +1132,7 @@
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -1045,17 +1155,29 @@
               "min": 0,
               "show": false
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 11,
+            "w": 12,
+            "x": 12,
+            "y": 38
+          },
           "id": 43,
           "legend": {
             "alignAsTable": true,
@@ -1071,14 +1193,14 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1094,6 +1216,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Front - Total number of connections",
           "tooltip": {
@@ -1104,6 +1227,7 @@
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -1126,29 +1250,42 @@
               "min": 0,
               "show": false
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "Connections",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": 365,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 38
+      },
+      "id": 90,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 39
+          },
           "id": 32,
           "legend": {
             "alignAsTable": true,
@@ -1164,14 +1301,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1224,12 +1360,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 39
+          },
           "id": 28,
           "legend": {
             "alignAsTable": true,
@@ -1245,14 +1387,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1304,25 +1445,34 @@
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "Queue",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": 451,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 39
+      },
+      "id": 91,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 0,
+            "y": 40
+          },
           "id": 35,
           "legend": {
             "alignAsTable": true,
@@ -1340,7 +1490,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
@@ -1352,7 +1502,6 @@
               "transform": "negative-Y"
             }
           ],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1420,12 +1569,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 12,
+            "y": 40
+          },
           "id": 46,
           "legend": {
             "alignAsTable": true,
@@ -1441,7 +1596,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 12,
+          "maxPerRow": 1,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
@@ -1457,7 +1612,6 @@
               "transform": "negative-Y"
             }
           ],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1524,25 +1678,34 @@
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "Requests / Responses",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": 403,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 40
+      },
+      "id": 92,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 11,
+            "w": 12,
+            "x": 0,
+            "y": 41
+          },
           "id": 24,
           "legend": {
             "alignAsTable": true,
@@ -1558,14 +1721,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1619,12 +1781,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 11,
+            "w": 12,
+            "x": 12,
+            "y": 41
+          },
           "id": 47,
           "legend": {
             "alignAsTable": true,
@@ -1640,14 +1808,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1700,25 +1867,34 @@
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "Responses by HTTP code",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": 372,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 41
+      },
+      "id": 93,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 42
+          },
           "id": 30,
           "legend": {
             "alignAsTable": true,
@@ -1734,14 +1910,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1795,12 +1970,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 42
+          },
           "id": 45,
           "legend": {
             "alignAsTable": true,
@@ -1816,14 +1997,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1877,12 +2057,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 52
+          },
           "id": 29,
           "legend": {
             "alignAsTable": true,
@@ -1898,14 +2084,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1958,12 +2143,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 52
+          },
           "id": 44,
           "legend": {
             "alignAsTable": true,
@@ -1979,14 +2170,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2039,12 +2229,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 1,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 62
+          },
           "id": 34,
           "legend": {
             "alignAsTable": true,
@@ -2060,7 +2256,7 @@
           "lines": true,
           "linewidth": 2,
           "links": [],
-          "minSpan": 3,
+          "maxPerRow": 4,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
@@ -2072,7 +2268,6 @@
               "fill": 0
             }
           ],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2133,12 +2328,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 62
+          },
           "id": 51,
           "legend": {
             "alignAsTable": true,
@@ -2154,7 +2355,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 3,
+          "maxPerRow": 4,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
@@ -2166,7 +2367,6 @@
               "fill": 0
             }
           ],
-          "span": 6,
           "stack": true,
           "steppedLine": false,
           "targets": [
@@ -2227,12 +2427,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 72
+          },
           "id": 33,
           "legend": {
             "alignAsTable": true,
@@ -2248,14 +2454,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 5,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2309,12 +2514,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 72
+          },
           "id": 69,
           "legend": {
             "alignAsTable": true,
@@ -2330,7 +2541,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 4,
+          "maxPerRow": 3,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
@@ -2342,7 +2553,6 @@
               "fill": 0
             }
           ],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2402,26 +2612,35 @@
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "Sessions",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": 315,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 42
+      },
+      "id": 94,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "decimals": 0,
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 73
+          },
           "id": 38,
           "legend": {
             "alignAsTable": true,
@@ -2437,14 +2656,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2498,12 +2716,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 73
+          },
           "id": 39,
           "legend": {
             "alignAsTable": true,
@@ -2519,14 +2743,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2579,26 +2802,35 @@
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "Health and Weight",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": 570,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 43
+      },
+      "id": 95,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "decimals": 1,
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 15,
+            "w": 24,
+            "x": 0,
+            "y": 74
+          },
           "id": 54,
           "legend": {
             "alignAsTable": true,
@@ -2614,7 +2846,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 12,
+          "maxPerRow": 1,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
@@ -2626,7 +2858,6 @@
               "transform": "negative-Y"
             }
           ],
-          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2686,25 +2917,34 @@
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "By Server Throughput",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": 421,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 44
+      },
+      "id": 96,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 11,
+            "w": 24,
+            "x": 0,
+            "y": 75
+          },
           "id": 58,
           "legend": {
             "alignAsTable": true,
@@ -2720,14 +2960,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 12,
+          "maxPerRow": 1,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2779,25 +3018,34 @@
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "By Server Connections",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": 397,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 45
+      },
+      "id": 97,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 76
+          },
           "id": 65,
           "legend": {
             "alignAsTable": true,
@@ -2813,14 +3061,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2873,12 +3120,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 76
+          },
           "id": 59,
           "legend": {
             "alignAsTable": true,
@@ -2894,14 +3147,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2953,24 +3205,33 @@
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "By Server Queue",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": 462,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 46
+      },
+      "id": 98,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 0,
+            "y": 77
+          },
           "id": 74,
           "legend": {
             "alignAsTable": true,
@@ -2986,7 +3247,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
@@ -2998,7 +3259,6 @@
               "transform": "negative-Y"
             }
           ],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -3052,12 +3312,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 12,
+            "y": 77
+          },
           "id": 71,
           "legend": {
             "alignAsTable": true,
@@ -3075,7 +3341,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
@@ -3087,7 +3353,6 @@
               "transform": "negative-Y"
             }
           ],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -3158,24 +3423,33 @@
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "By Server Requests / Responses",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": -146,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 47
+      },
+      "id": 99,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 78
+          },
           "height": "400px",
           "id": 64,
           "legend": {
@@ -3192,14 +3466,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -3252,25 +3525,34 @@
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "By Server Responses by HTTP code",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": 359,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 48
+      },
+      "id": 100,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 79
+          },
           "id": 61,
           "legend": {
             "alignAsTable": true,
@@ -3286,14 +3568,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -3346,12 +3627,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 79
+          },
           "id": 60,
           "legend": {
             "alignAsTable": true,
@@ -3367,14 +3654,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": true,
           "steppedLine": false,
           "targets": [
@@ -3427,12 +3713,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 88
+          },
           "id": 66,
           "legend": {
             "alignAsTable": true,
@@ -3448,14 +3740,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -3508,12 +3799,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 88
+          },
           "id": 67,
           "legend": {
             "alignAsTable": true,
@@ -3529,14 +3826,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -3588,25 +3884,34 @@
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "By Server Sessions",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": 465,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 49
+      },
+      "id": 101,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 0,
+            "y": 89
+          },
           "id": 62,
           "legend": {
             "alignAsTable": true,
@@ -3622,14 +3927,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 12,
+          "maxPerRow": 1,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -3682,13 +3986,19 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "decimals": 1,
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 12,
+            "y": 89
+          },
           "id": 56,
           "legend": {
             "alignAsTable": true,
@@ -3704,14 +4014,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 12,
+          "maxPerRow": 1,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -3764,13 +4073,19 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "decimals": 0,
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 0,
+            "y": 101
+          },
           "id": 57,
           "legend": {
             "alignAsTable": true,
@@ -3786,14 +4101,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 12,
+          "maxPerRow": 1,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -3846,13 +4160,19 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "decimals": 1,
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 12,
+            "y": 101
+          },
           "id": 55,
           "legend": {
             "alignAsTable": true,
@@ -3868,14 +4188,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 12,
+          "maxPerRow": 1,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -3928,12 +4247,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 0,
+            "y": 113
+          },
           "id": 72,
           "legend": {
             "alignAsTable": true,
@@ -3949,14 +4274,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -4009,12 +4333,18 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "description": "",
           "editable": true,
           "error": false,
           "fill": 2,
           "grid": {},
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 12,
+            "y": 113
+          },
           "id": 73,
           "legend": {
             "alignAsTable": true,
@@ -4030,14 +4360,13 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 6,
+          "maxPerRow": 2,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -4089,24 +4418,33 @@
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "By Server Health Weight",
-      "titleSize": "h6"
+      "type": "row"
     },
     {
-      "collapse": true,
-      "height": 250,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 50
+      },
+      "id": 102,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
           "grid": {},
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 114
+          },
           "id": 40,
           "legend": {
             "alignAsTable": true,
@@ -4122,14 +4460,13 @@
           "lines": true,
           "linewidth": 2,
           "links": [],
-          "minSpan": 12,
+          "maxPerRow": 1,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": true,
           "steppedLine": false,
           "targets": [
@@ -4182,11 +4519,17 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_LOCALHOST}",
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
           "grid": {},
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 12,
+            "y": 114
+          },
           "id": 41,
           "legend": {
             "alignAsTable": true,
@@ -4202,14 +4545,13 @@
           "lines": true,
           "linewidth": 2,
           "links": [],
-          "minSpan": 12,
+          "maxPerRow": 1,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
           "stack": true,
           "steppedLine": false,
           "targets": [
@@ -4261,14 +4603,12 @@
         }
       ],
       "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
       "title": "Scrape info",
-      "titleSize": "h6"
+      "type": "row"
     }
   ],
-  "schemaVersion": 14,
+  "refresh": "5m",
+  "schemaVersion": 18,
   "style": "dark",
   "tags": [
     "haproxy",
@@ -4278,8 +4618,13 @@
     "list": [
       {
         "allValue": null,
-        "current": {},
-        "datasource": "${DS_LOCALHOST}",
+        "current": {
+          "tags": [],
+          "text": "10.0.2.67",
+          "value": "10.0.2.67"
+        },
+        "datasource": "Prometheus",
+        "definition": "",
         "hide": 0,
         "includeAll": false,
         "label": "Host",
@@ -4289,6 +4634,7 @@
         "query": "label_values(haproxy_up, instance)",
         "refresh": 1,
         "regex": "/([^:]+):.*/",
+        "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": null,
         "tags": [],
@@ -4298,8 +4644,12 @@
       },
       {
         "allValue": null,
-        "current": {},
-        "datasource": "${DS_LOCALHOST}",
+        "current": {
+          "text": "9101",
+          "value": "9101"
+        },
+        "datasource": "Prometheus",
+        "definition": "",
         "hide": 2,
         "includeAll": false,
         "label": null,
@@ -4309,6 +4659,7 @@
         "query": "label_values(haproxy_up, instance)",
         "refresh": 1,
         "regex": "/[^:]+:(.*)/",
+        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
@@ -4318,8 +4669,12 @@
       },
       {
         "allValue": null,
-        "current": {},
-        "datasource": "${DS_LOCALHOST}",
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": "Prometheus",
+        "definition": "",
         "hide": 0,
         "includeAll": true,
         "label": "Backend",
@@ -4329,6 +4684,7 @@
         "query": "label_values(haproxy_backend_bytes_in_total{instance=~\"$host:$port\"}, backend)",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": null,
         "tags": [],
@@ -4338,8 +4694,12 @@
       },
       {
         "allValue": null,
-        "current": {},
-        "datasource": "${DS_LOCALHOST}",
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": "Prometheus",
+        "definition": "",
         "hide": 0,
         "includeAll": true,
         "label": "Frontend",
@@ -4349,6 +4709,7 @@
         "query": "label_values(haproxy_frontend_bytes_in_total{instance=~\"$host:$port\"}, frontend)",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": null,
         "tags": [],
@@ -4358,8 +4719,12 @@
       },
       {
         "allValue": null,
-        "current": {},
-        "datasource": "${DS_LOCALHOST}",
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": "Prometheus",
+        "definition": "",
         "hide": 0,
         "includeAll": true,
         "label": "Server",
@@ -4369,6 +4734,7 @@
         "query": "label_values(haproxy_server_bytes_in_total{instance=~\"$host:$port\", backend=~\"$backend\"}, server)",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": null,
         "tags": [],
@@ -4378,8 +4744,12 @@
       },
       {
         "allValue": null,
-        "current": {},
-        "datasource": "${DS_LOCALHOST}",
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": "Prometheus",
+        "definition": "",
         "hide": 0,
         "includeAll": true,
         "label": "HTTP Code",
@@ -4389,6 +4759,7 @@
         "query": "label_values(haproxy_server_http_responses_total{instance=~\"$host:$port\", backend=~\"$backend\", server=~\"$server\"}, code)",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": null,
         "tags": [],
@@ -4411,7 +4782,7 @@
           {
             "selected": false,
             "text": "auto",
-            "value": "$__auto_interval"
+            "value": "$__auto_interval_interval"
           },
           {
             "selected": true,
@@ -4446,12 +4817,13 @@
         ],
         "query": "30s,1m,5m,1h,6h,1d",
         "refresh": 2,
+        "skipUrlSync": false,
         "type": "interval"
       }
     ]
   },
   "time": {
-    "from": "now-30h",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {
@@ -4480,6 +4852,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "HAProxy",
-  "version": 6
+  "title": "HAProxy Overview",
+  "uid": "hIKCP96mz",
+  "version": 1
 }
