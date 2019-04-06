@@ -11,3 +11,22 @@ datasources:
   isDefault: true
   version: 1
   editable: true
+
+- name: Azure
+  type: grafana-azure-monitor-datasource
+  orgId: 1
+  typeLogoUrl: public/plugins/grafana-azure-monitor-datasource/img/logo.jpg
+  access: proxy
+  url: /api/datasources/proxy/2
+  isDefault: false
+  jsonData:
+    cloudName: azuremonitor
+    subscriptionId: da2a8038-8fe3-4863-9c81-5cc9d266b8c1
+    tenantId: 98932909-9a5a-4d18-ace4-7236b5b5e11d
+    clientId: 0e0e4202-6d4f-4119-8d30-49a71ed1bdfd
+    logAnalyticsDefaultWorkspace: 7d4f2b57-1c04-42f4-b48d-7ca19f5a910c
+    azureLogAnalyticsSameAs: true
+    keepCookies: []
+  secureJsonData:
+    clientSecret: e19e9e35-2938-4270-b424-3beeabcd2ae0
+  editable: true
