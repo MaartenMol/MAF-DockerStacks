@@ -133,7 +133,7 @@ services:
 
   haproxy:
     image: prom/haproxy-exporter
-    command: --haproxy.scrape-uri="http://lb-vip:1936/haproxy?stats;csv"
+    command: --haproxy.scrape-uri="http://lb-vip.mol.local:1936/haproxy?stats;csv"
     networks:
       - monitoring
     deploy:
