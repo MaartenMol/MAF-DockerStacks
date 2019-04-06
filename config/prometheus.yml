@@ -37,12 +37,6 @@ scrape_configs:
       - 'tasks.haproxy'
       type: 'A'
       port: 9101
-    relabel_configs:
-      - source_labels: [__address__]
-        separator: ':'
-        regex: '(.*):(.*)'
-        replacement: '$1'
-        target_label: instance
 
   # - job_name: 'pushgateway'
   #   scrape_interval: 5s
