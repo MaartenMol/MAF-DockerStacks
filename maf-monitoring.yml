@@ -187,6 +187,8 @@ services:
       interval: 10s
       timeout: 3s
     deploy:
+      placement:
+        constraints: [node.role == manager]
       mode: replicated
       replicas: 1
       restart_policy:
