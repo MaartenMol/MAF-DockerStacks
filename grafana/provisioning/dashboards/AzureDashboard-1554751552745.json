@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 8,
   "links": [],
   "panels": [
     {
@@ -23,7 +22,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Azure Monitor",
+      "datasource": "Azure",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -189,7 +188,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Azure Monitor",
+      "datasource": "Azure",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -434,10 +433,10 @@
     },
     {
       "columns": [],
-      "datasource": "Azure Monitor",
+      "datasource": "Azure",
       "fontSize": "100%",
       "gridPos": {
-        "h": 6,
+        "h": 14,
         "w": 24,
         "x": 0,
         "y": 8
@@ -547,5 +546,5 @@
   "timezone": "",
   "title": "AzureDashboard",
   "uid": "iZ5BOreiz",
-  "version": 2
+  "version": 1
 }
