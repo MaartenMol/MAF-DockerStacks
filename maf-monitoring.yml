@@ -144,7 +144,7 @@ services:
         window: 10s
 
   grafana:
-    image: grafana/grafana:6.1.0
+    image: grafana/grafana:6.1.2
     depends_on:
       - postgres
       - redis
