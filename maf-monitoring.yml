@@ -68,6 +68,8 @@ services:
       interval: 10s
       timeout: 3s
     deploy:
+      placement:
+        constraints: [node.role == manager]
       restart_policy:
         condition: on-failure
         delay: 5s
